@@ -1,0 +1,50 @@
+---
+title: "001_growth_curves"
+author: "Emily Conklin"
+date: "2024-12-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+
+```
+
+```{r growth curves}
+
+cleaned_input <- read.csv("../inputs/cleandf_params.csv")
+
+#calculate aboveground carbon as a function of tree taxon and age class
+chapman_richards <- function(A, k, p, age){
+  agc <- A * (1 - exp(-k * age))^p
+  return(agc)
+}
+
+#calculate growth rate per age class
+agc_rate <- function(agc, age){
+  rate_out <- agc / age
+  return(rate_out)
+}
+
+#run examples
+test_group <- "Pseudotsuga"
+n_age_classes <- 150
+
+#grab parameters for one group for testing
+test_group_df <- cleaned_input %>%
+  filter(group == test_group) %>%
+  select(group, A, k) %>%
+  mutate(p = 2) # NOTE - double check what p is - expansion of plantation or somethinge else?
+  
+#run AGC and rate functions per age class
+test_age_classes <- do.call("rbind", replicate(n_age_classes, test_group_df, simplify = FALSE)) %>%
+  mutate(age = seq(1:n_age_classes)) %>%
+  mutate(agc = chapman_richards(A, k, p, age)) %>%
+  mutate(agc_rate = agc_rate(agc, age))
+
+#quick test plot
+ggplot(test_age_classes) +
+  geom_line(aes(x = age, y = agc))
+
+```
