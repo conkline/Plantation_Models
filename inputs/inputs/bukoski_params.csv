@@ -1,0 +1,154 @@
+parametre,value,group
+A:,88.6,Acacia
+k:,0.22,Acacia
+Faustmann:,9,Acacia
+MSY:,10,Acacia
+Hartman:,10,Acacia
+Van Kooten:,21,Acacia
+Weighted mean AGC:,37.1,Acacia
+Area:,1000,Acacia
+% Saved:,10%,Acacia
+% Harvested:,90%,Acacia
+Demand growth:,0.80%,Acacia
+Area expansion:,2.00%,Acacia
+A:,122.6,Cryptomeria
+k:,0.06,Cryptomeria
+Wtd. Mean AGC:,35.93,Cryptomeria
+Faustmann:,25,Cryptomeria
+MSY:,37,Cryptomeria
+Hartman:,47,Cryptomeria
+Van Kooten:,100,Cryptomeria
+Weighted mean AGC:,35.9,Cryptomeria
+Area:,1000,Cryptomeria
+% Saved:,10%,Cryptomeria
+% Harvested:,90%,Cryptomeria
+Demand growth:,0.80%,Cryptomeria
+Area expansion:,2.00%,Cryptomeria
+A:,101.4,Eucalyptus
+k:,0.2,Eucalyptus
+Weighted mean AGC:,42.44,Eucalyptus
+Faustmann,10,Eucalyptus
+MSY:,11,Eucalyptus
+Hartman:,10,Eucalyptus
+Van Kooten:,24,Eucalyptus
+Area:,1000,Eucalyptus
+% Saved:,10%,Eucalyptus
+% Harvested:,90%,Eucalyptus
+Demand growth:,0.80%,Eucalyptus
+Area expansion:,2.00%,Eucalyptus
+A:,55.7,Cunninghamia
+k:,0.09,Cunninghamia
+Wtd. Mean AGC:,18.06,Cunninghamia
+Faustmann:,18,Cunninghamia
+MSY:,25,Cunninghamia
+Hartman:,39,Cunninghamia
+Van Kooten:,100,Cunninghamia
+Area:,1000,Cunninghamia
+% Saved:,10%,Cunninghamia
+% Harvested:,90%,Cunninghamia
+Demand growth:,0.80%,Cunninghamia
+Area expansion:,2.00%,Cunninghamia
+A:,96,Larix
+k:,0.06,Larix
+Wtd. Mean AGC:,28.13,Larix
+Faustmann:,25,Larix
+MSY:,39,Larix
+Hartman:,48,Larix
+Van Kooten:,100,Larix
+Area:,1000,Larix
+% Saved:,10%,Larix
+% Harvested:,90%,Larix
+Demand growth:,0.80%,Larix
+Area expansion:,2.00%,Larix
+A:,322.3,Picea
+k:,0.02,Picea
+Rotation:,27,Picea
+Area:,1000,Picea
+% Saved:,10%,Picea
+% Harvested:,90%,Picea
+Demand growth:,1.00%,Picea
+Area expansion:,2.00%,Picea
+A:,111.7,Pinus
+k:,0.04,Pinus
+Wtd. Faust. Agc:,26.9,Pinus
+Faustmann:,32,Pinus
+MSY:,57,Pinus
+Hartman:,59,Pinus
+Van Kooten:,100,Pinus
+Area:,1000,Pinus
+% Saved:,10.00%,Pinus
+% Harvested:,90.00%,Pinus
+Demand growth:,0.80%,Pinus
+Area expansion:,2.00%,Pinus
+A:,84.8,Populus
+k:,0.1,Populus
+Wtd. Mean AGC:,29.05,Populus
+Faustmann:,17,Populus
+MSY:,23,Populus
+Hartman:,34,Populus
+Van Kooten:,100,Populus
+Area:,1000,Populus
+% Saved:,10%,Populus
+% Harvested:,90%,Populus
+Demand growth:,0.80%,Populus
+Area expansion:,2.00%,Populus
+A:,240.3,Pseudotsuga
+k:,0.04,Pseudotsuga
+Weighted mean AGC:,53.44,Pseudotsuga
+Faustmann:,30,Pseudotsuga
+MSY:,54,Pseudotsuga
+Hartman:,56,Pseudotsuga
+Van Kooten:,100,Pseudotsuga
+Area:,1000,Pseudotsuga
+% Saved:,10%,Pseudotsuga
+% Harvested:,90%,Pseudotsuga
+Demand growth:,0.80%,Pseudotsuga
+Area expansion:,2.00%,Pseudotsuga
+A:,108.6,Temperate Needleleaf
+k:,0.05,Temperate Needleleaf
+Weighted Faust. AGC:,28.05,Temperate Needleleaf
+Faustmann:,27,Temperate Needleleaf
+MSY:,46,Temperate Needleleaf
+Hartman:,52,Temperate Needleleaf
+Van Kooten:,100,Temperate Needleleaf
+Area:,1000,Temperate Needleleaf
+% Saved:,10%,Temperate Needleleaf
+% Harvested:,90%,Temperate Needleleaf
+Demand growth:,0.80%,Temperate Needleleaf
+Area expansion:,2.00%,Temperate Needleleaf
+A:,102.8,Temperate Broadleaf
+k:,0.07,Temperate Broadleaf
+Wtd Faust. AGC:,29.67,Temperate Broadleaf
+Faustmann:,21,Temperate Broadleaf
+MSY:,33,Temperate Broadleaf
+Hartman:,43,Temperate Broadleaf
+Van Kooten:,100,Temperate Broadleaf
+Area:,1000,Temperate Broadleaf
+% Saved:,10%,Temperate Broadleaf
+% Harvested:,90%,Temperate Broadleaf
+Demand growth:,0.80%,Temperate Broadleaf
+Area expansion:,2.00%,Temperate Broadleaf
+A:,81.4,Tropical Needleleaf
+k:,0.06,Tropical Needleleaf
+Wtd. Faust. AGC:,23.85,Tropical Needleleaf
+Faustmann:,25,Tropical Needleleaf
+MSY:,38,Tropical Needleleaf
+Hartman:,49,Tropical Needleleaf
+VanKooten:,100,Tropical Needleleaf
+Area:,1000,Tropical Needleleaf
+% Saved:,10%,Tropical Needleleaf
+% Harvested:,90%,Tropical Needleleaf
+Demand growth:,0.80%,Tropical Needleleaf
+Area expansion:,2.00%,Tropical Needleleaf
+A:,81.8,Boreal Needleleaf
+k:,0.03,Boreal Needleleaf
+Wtd. Faust. AGC:,17.46,Boreal Needleleaf
+Faustmann:,39,Boreal Needleleaf
+MSY:,77,Boreal Needleleaf
+Hartman:,52,Boreal Needleleaf
+VanKooten:,100,Boreal Needleleaf
+Area:,1000,Boreal Needleleaf
+% Saved:,10%,Boreal Needleleaf
+% Harvested:,90%,Boreal Needleleaf
+Demand growth:,0.80%,Boreal Needleleaf
+Area expansion:,2.00%,Boreal Needleleaf
