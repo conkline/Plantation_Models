@@ -13,6 +13,7 @@ library(tidyverse)
 
 ```{r growth curves}
 
+#read in input data extracted from spreadsheets
 cleaned_input <- read.csv("../inputs/cleandf_params.csv")
 
 #calculate aboveground carbon as a function of tree taxon and age class
@@ -28,23 +29,26 @@ agc_rate <- function(agc, age){
 }
 
 #run examples
+# NOTE - it will take an extra step but we can do custom "n" per species in the future
 test_group <- "Pseudotsuga"
-n_age_classes <- 150
+n_age_classes <- 150 
+n_species <- length(unique(cleaned_input$group))
 
-#grab parameters for one group for testing
-test_group_df <- cleaned_input %>%
-  filter(group == test_group) %>%
+#select relevant columns and add 'p' parameter
+growth_params <- cleaned_input %>%
   select(group, A, k) %>%
-  mutate(p = 2) # NOTE - double check what p is - expansion of plantation or somethinge else?
-  
-#run AGC and rate functions per age class
-test_age_classes <- do.call("rbind", replicate(n_age_classes, test_group_df, simplify = FALSE)) %>%
-  mutate(age = seq(1:n_age_classes)) %>%
+  mutate(p = 2) # NOTE - double check what p is - expansion of plantation or something else?
+
+#run AGC and rate functions per age class per species
+age_classes <- do.call("rbind", replicate(n_age_classes, growth_params, simplify = FALSE)) %>%
+  arrange(group) %>%
+  mutate(age = rep(seq(from = 1, to = n_age_classes), times = n_species)) %>%
   mutate(agc = chapman_richards(A, k, p, age)) %>%
   mutate(agc_rate = agc_rate(agc, age))
 
 #quick test plot
-ggplot(test_age_classes) +
-  geom_line(aes(x = age, y = agc))
+ggplot(age_classes) +
+  geom_line(aes(x = age, y = agc)) +
+  facet_wrap(facets = vars(group))
 
 ```
