@@ -31,7 +31,7 @@ agc_rate <- function(agc, age){
 #run examples
 # NOTE - it will take an extra step but we can do custom "n" per species in the future
 test_group <- "Pseudotsuga"
-n_age_classes <- 150 
+n_age_classes <- 150
 n_species <- length(unique(cleaned_input$group))
 
 #select relevant columns and add 'p' parameter
@@ -40,15 +40,101 @@ growth_params <- cleaned_input %>%
   mutate(p = 2) # NOTE - double check what p is - expansion of plantation or something else?
 
 #run AGC and rate functions per age class per species
-age_classes <- do.call("rbind", replicate(n_age_classes, growth_params, simplify = FALSE)) %>%
+age_classes <- do.call("rbind", replicate(n_age_classes + 1, growth_params, simplify = FALSE)) %>%
   arrange(group) %>%
-  mutate(age = rep(seq(from = 1, to = n_age_classes), times = n_species)) %>%
+  mutate(age = rep(seq(from = 0, to = n_age_classes), times = n_species)) %>%
   mutate(agc = chapman_richards(A, k, p, age)) %>%
-  mutate(agc_rate = agc_rate(agc, age))
+  mutate(agc_rate = agc_rate(agc, age)) %>%
+  mutate(agc_rate = ifelse(is.nan(agc_rate), 0, agc_rate))
 
 #quick test plot
 ggplot(age_classes) +
   geom_line(aes(x = age, y = agc)) +
   facet_wrap(facets = vars(group))
+
+#TODO - ask Jacob where this growth data comes from
+
+```
+
+```{r}
+
+#set species parameters
+#eventually it would be nice to have the actual rotation age formulas in here
+#rather than hard-coding everything
+
+tmp_group <- "Pseudotsuga"
+faustmann <- 30
+msy <- 54
+total_area <- 100000
+area_per_age <- total_area / faustmann
+sim_years <- 200
+
+#pare down age class dataset
+dougfir_agc <- age_classes %>%
+  filter(group == tmp_group) %>%
+  select(group, age, agc)
+
+#simulation under faustmann rotation age (economic)
+#each year should be the same as the faustmann-aged areas are just converted back to 1-year areas
+table_faustmann <- tibble(group = tmp_group,
+                          sim_year = rep(1:sim_years, each = faustmann + 1),
+                          age = rep(0:faustmann, times = sim_years),
+                          area = area_per_age,
+                          scenario = "faustmann") 
+
+#simulation under msy rotation age (biological)
+#max age in the system will start at faustmann and then increase to MSY
+max_age <- faustmann
+age_classes_tmp <- 0:faustmann
+age_classes_all <- c()
+sim_years_all <- c()
+
+#for loop to figure out age classes per year
+#there's definitely a cleaner way of doing this but i am lazy
+for (i in 1:sim_years){
+    
+  #add years and age classes to lists
+  age_classes_all <- c(age_classes_all, age_classes_tmp)
+  sim_years_all <- c(sim_years_all, rep(i, times = length(age_classes_tmp)))
+  
+  if (max_age < (msy - 1)){ #latent period - letting trees grow up to MSY
+    
+    #age up trees by one year
+    age_classes_tmp <- age_classes_tmp + 1
+    
+    #increase max_age by one
+    max_age <- max_age + 1
+    
+  } else{ #harvest period - oldest trees have reached MSY
+    
+    #cut down oldest trees
+    age_classes_tmp[age_classes_tmp == msy] <- 0
+    
+  }
+}
+
+#simulation under msy rotation age (biological)
+table_msy <- tibble(group = tmp_group,
+                    sim_year = sim_years_all,
+                    age = age_classes_all,
+                    area = area_per_age,
+                    scenario = "msy") 
+
+#combine scenario datasets
+all_scenarios <- bind_rows(table_faustmann, table_msy) %>%
+  left_join(dougfir_agc) %>% 
+  mutate(agc_area = area_per_age * agc) #is this right? AGC x area?
+
+#get annual carbon sums per scenario
+all_scenarios_yearly <- all_scenarios %>%
+  group_by(sim_year, scenario) %>%
+  summarize(agc_sum = sum(agc_area))
+
+#test plot
+ggplot(all_scenarios_yearly) +
+  geom_line(aes(x = sim_year, y = agc_sum, color = scenario))
+
+#how much unmanaged forest would you be saving?
+  #see herbicide study for example
 
 ```
